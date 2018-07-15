@@ -2,8 +2,8 @@ NS ?= newtonlabs
 VERSION ?= latest
 IMAGE_NAME ?= fargate-router
 PORTS ?= -p 80:80
-CLUSTER_NAME ?= default
-SERVICE_NAME ?= default
+CLUSTER_NAME ?= POC-DEV-cluster
+SERVICE_NAME ?= POC-DEV-router
 
 .PHONY: build build-arm push push-arm shell shell-arm run run-arm start start-arm stop stop-arm rm rm-arm release release-arm
 
@@ -20,6 +20,6 @@ release: build
 	make push -e VERSION=$(VERSION)
 
 deploy:
-	aws ecs update-service --cluster $(CLUSTER_NAME) --service $(SERVICE_NAME) --force-new-deployment
+	aws ecs update-service --cluster $(CLUSTER_NAME) --service $(SERVICE_NAME) --force-new-deployment --region us-east-1
 
 default: build
